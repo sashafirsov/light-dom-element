@@ -1,3 +1,29 @@
+**DRAFT**, not published yet
+___
+# light-dom-element 
+`light-dom-element` provides html TEMPLATE capabilities in light DOM: instead of 
+[shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) the template content is 
+inlined within `light-dom-element` **without** css insulation. The template content is cloned and `*[slot]` from 
+`light-dom-element` would be 
+* removed from DOM
+* cloned into `slot` with same name within cloned template content
+
+[css-chain](https://github.com/sashafirsov/css-chain/blob/main/README.md#light-dom) 
+is used as W3C template compliant rendering engine. 
+
+# difference to slotted-element
+While both `slotted-element` and `light-dom-element` are rendering template by applying slots payload, 
+they serve different goals. Unlike [slotted-element](https://github.com/sashafirsov/slotted-element) which is designed to render external content,
+the `light-dom-element` meant to cover simpler case of applying template to HTML without loading lifecycle awareness.
+
+It assumes there is no need for loading/error handling. Which of course could be customized by inheriting SlottedElement.
+
+This assumption comes from primary use case of `light-dom-element` - generating dom from existing 
+(in page or project url) template and slots content. In case of static site generator both, the template and payload, 
+are part of project and real-time available.
+
+---
+
 # fetch-element & slotted-element
 
 are covering the typical UI tasks:

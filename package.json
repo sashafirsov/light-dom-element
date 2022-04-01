@@ -1,17 +1,17 @@
 {
-    "name": "slotted-element",
-    "version": "1.1.1",
-    "description": "Web component fetch-element for ajax and render JSON/XML data as table and slotted-element without shadow DOM",
+    "name": "light-dom-element",
+    "version": "0.0.1",
+    "description": "provides html TEMPLATE capabilities in light DOM: instead of shadow DOM the template content is inlined within `light-dom-element` without css insulation.",
     "author": {
         "name": "Sasha Firsov",
         "email": "suns@simulationworks.com",
         "url": "https://blog.firsov.net/"
     },
-    "homepage": "https://github.com/sashafirsov/slotted-element",
-    "bugs": "https://github.com/sashafirsov/slotted-element/issues",
+    "homepage": "https://github.com/sashafirsov/light-dom-element",
+    "bugs": "https://github.com/sashafirsov/light-dom-element/issues",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sashafirsov/slotted-element.git"
+        "url": "https://github.com/sashafirsov/light-dom-element.git"
     },
     "keywords": [
         "JS",
@@ -22,8 +22,8 @@
         "WebComponent"
     ],
     "license": "Apache-2.0",
-    "browser": "slotted-element.js",
-    "module": "slotted-element.js",
+    "browser": "light-dom-element.js",
+    "module": "light-dom-element.js",
     "type": "module",
     "files": [
         "*",
@@ -31,7 +31,7 @@
     ],
     "scripts": {
         "start": "npx @web/dev-server",
-        "test": "echo 'test is implemented in https://github.com/sashafirsov/slotted-element-test' && exit 0"
+        "test": "echo 'test is implemented in https://github.com/sashafirsov/light-dom-element-test' && exit 0"
     },
     "dependencies": {
         "css-chain": "^1.1.2"
