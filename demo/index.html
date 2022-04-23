@@ -1,63 +1,108 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <title>light-dom-element demo</title>
     <style>
-        @import "demo.css";
-        svg{ height: 16rem; }
+        body{ display: flex; flex-wrap: wrap; align-content: stretch; gap: 1rem; }
+        body>*{flex:1; min-width: 32rem;}
+
     </style>
-    <script type="importmap">{"imports": {"css-chain": "../node_modules/css-chain/CssChain.js"}}</script>
-    <script type="module" src="https://unpkg.com/html-demo-element@1.0.7/html-demo-element.js"></script>
-    <script type="module" src="../slotted-element.js"></script>
 </head>
 <body>
+<header>
+    <h1>&lt;light-dom-element&gt; demo</h1>
+    <p> Developer's documentation in <a href="https://github.com/sashafirsov/light-dom-element">Git repo</a>
+        |   This page <a href="https://github.com/sashafirsov/light-dom-element/blob/main/demo/index.html">source</a>
+    </p>
+    <p> While <code>light-dom-element</code> can render JSON as in sample bellow,
+        the thorough handling of loading-rendering lifecycle is done by
+        <a href="https://github.com/sashafirsov/slotted-element">slotted-element</a>
+    </p>
+    <p>More extended set of template with slots use is covered by
+        <a href="https://unpkg.com/css-chain-test@1.1.2/dist/slots.html">CssChain slots demo</a>.
+        CssChain is a modern DOM manipulation library with support of Light and Shadow DOM.
+    </p>
+</header>
 
-<h1> slotted-element demo </h1>
-<slotted-element src="nav.html"></slotted-element>
-<p>
-    <var>slotted-element</var> is web component implementing slots without shadow DOM.
-    It is based on <var>fetch-element</var> component to fetch data and render from retrieved JSON or HTML.
-</p>
-<main>
-<html-demo-element legend="From url">
-    <slotted-element src="embedded.html"></slotted-element>
+<html-demo-element legend="Inline slots & template">
+    <template>
+<light-dom-element>
+    <template>
+        <slot name="slot1"><h5>FAIL heading 5 🙄</h5></slot>
+        <slot name="slot2">
+            <button>FAIL action 🤥</button>
+        </slot>
+        <slot name="slot3"><p> slot 3 not overridden </p></slot>
+        default slot
+    </template>
+    <a slot="slot2" href="#">link 😃</a>
+    <h3 slot="slot1" id="heading">heading 3 😌</h3>
+</light-dom-element>
+    </template>
 </html-demo-element>
 
-<html-demo-element legend="Error case">
-    <slotted-element src="https://badUrl.heck">
-        <p slot="loading" hidden>Loading... ⏳ </p>
-        <p slot="error" hidden>Something went wrong. 😭 </p>
-    </slotted-element>
+<html-demo-element legend="in-page slots & template">
+    <template>
+<template id="in-page-template">
+    <slot name="slot1"><h5>FAIL heading 5🙄</h5></slot>
+    <slot name="slot2">
+        <button>FAIL action 🤥</button>
+    </slot>
+    <slot name="slot3"><p> slot 3 not overridden </p></slot>
+    default slot
+</template>
+<template id="in-page-slots">
+    <a slot="slot2" href="#">link 😃</a>
+    <h3 slot="slot1" >heading 3 😌</h3>
+</template>
+<light-dom-element srcset="in-page-slots" for="in-page-template"></light-dom-element>
+    </template>
 </html-demo-element>
 
-<html-demo-element legend="Content would be placed inside of 'loaded' slot ">
-    <slotted-element src="embedded.html">
-        <fieldset>
-            <legend> Slots located in wrapper </legend>
-            <p slot="loading" hidden> Loading... ⏳ </p>
-            <p slot="error" hidden> What could be wrong? </p>
-            <p slot="loaded" hidden> Replaced with content of <b>embedded.html</b> </p>
-        </fieldset>
-    </slotted-element>
+<html-demo-element legend="Slots & template from URL">
+    <template>
+<light-dom-element src="slots.html" code="template.html"></light-dom-element>
+    </template>
 </html-demo-element>
 
-<html-demo-element legend="From key:value JSON">
-    <slotted-element src="doc.json">
-        <fieldset>
-            <legend> <b>doc.json</b> as table </legend>
-            <p slot="loaded" hidden>filled with key:value</p>
-        </fieldset>
-    </slotted-element>
+<html-demo-element legend="slots.html" src="slots.html"></html-demo-element>
+
+<html-demo-element legend="template.html" src="template.html"></html-demo-element>
+
+<script type="module" src="https://unpkg.com/html-demo-element@1.0/html-demo-element.js"></script>
+<script type="module" src="../light-dom-element.js"></script>
+
+<html-demo-element legend="json rendering">
+    <json-sample src="doc.json">
+        <template>
+            <fieldset>
+                <legend>name: <slot name="name"></slot></legend>
+                <slot name="title"></slot><br/>
+                <slot name="portrait"></slot>
+            </fieldset>
+        </template>
+    </json-sample>
 </html-demo-element>
 
-<html-demo-element legend="array dwarfs.json as table">
-    <slotted-element src="dwarfs.json"></slotted-element>
+<html-demo-element legend="load json by overriding fetch()">
+<script type="module">
+    import LightDomElement from "../light-dom-element.js";
+    class JsonSample extends LightDomElement
+    {
+        async fetch( url ){
+            const obj = await ( await fetch(url) ).json();
+            return Object.keys( obj )
+                    .map( key =>
+                        key === 'portrait'
+                        ? `<img alt="${key}" slot="${key}" src="${ obj[key] }"/>`
+                        : `<span slot="${key}">${ obj[key] }</span>` )
+                    .join('\n')
+        }
+    }
+    customElements.define('json-sample', JsonSample);
+</script>
 </html-demo-element>
-
-<html-demo-element legend="src is image confused.svg">
-    <slotted-element src="confused.svg"></slotted-element>
-</html-demo-element>
-</main>
 
 </body>
 </html>

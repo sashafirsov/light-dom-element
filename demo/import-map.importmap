@@ -1,5 +1,0 @@
-{
-    "imports": {
-        "css-chain": "../node_modules/css-chain/css-chain.js"
-    }
-}

@@ -1,6 +1,6 @@
 {
     "name": "Doc",
     "title": "Dwarf",
-    "age": 50,
-    "portrait": "doc.png"
+    "portrait": "doc.png",
+    "age": 50
 }
