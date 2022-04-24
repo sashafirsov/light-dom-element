@@ -8,5 +8,4 @@ export default class LightDomElement extends ShadowDomElement
     attachShadow(){};
 }
 
-((ce,tag)=>ce.get(tag) || ce.define(tag, LightDomElement))(window.customElements,'light-dom-element');
-window.customElements.get('light-dom-element') || window.customElements.define('light-dom-element', LightDomElement);
+window.customElements.define('light-dom-element', LightDomElement);
