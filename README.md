@@ -67,10 +67,10 @@ npm start
 ```
 
 # Typescript
-`import SlottedElement from 'light-dom-element'` code has [typings](light-dom-element.d.ts) along with JSDoc enabled. 
+`import LightDomElement from 'light-dom-element'` code has [typings](light-dom-element.d.ts) along with JSDoc enabled. 
 
 # dependencies
-none
+`shadow-dom-element`, `css-chain`
 
 [npm-image]:      https://img.shields.io/npm/v/light-dom-element.svg
 [npm-url]:        https://npmjs.org/package/light-dom-element
