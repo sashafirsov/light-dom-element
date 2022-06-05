@@ -1,6 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=demo/" />
-    <title>light-dom-element</title>
-</head><body><a href="demo/">Demo</a></body></html>
+    <title>shadow-dom-element</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "css-chain": "https://unpkg.com/css-chain@1.1/CssChain.js",
+          "shadow-dom-element": "https://unpkg.com/shadow-dom-element@0.0/shadow-dom-element.js"
+        }
+      }
+    </script>
+    <script type="module" src="light-dom-element.js"></script>
+</head>
+<body>
+
+<light-dom-element code="./demo/demo-header.html" >
+    <link slot="page-source" href="https://github.com/sashafirsov/shadow-dom-element/blob/main/index.html" />
+</light-dom-element>
+<h2>
+    <a href="demo/index.html">Tech Demo</a>
+</h2>
+<hr/>
+<a href="demo/ananke/content/en/index.html">Ananke site template demo</a>
+<ul>
+    <li><a href="demo/ananke/content/en/index.html">index.html</a> - home page with <var>summary-with-image</var>
+        inline template, <br/>
+        external template use by <code>code="<a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/templates/header.html"
+            >./templates/header.html</a>"</code>
+    </li>
+    <li>
+        <a href="demo/ananke/content/en/chapter-6.html">chapter-6.html</a>,
+        <a href="demo/ananke/content/en/chapter-5.html">chapter-5.html</a>,
+        <a href="demo/ananke/content/en/chapter-4.html">chapter-4.html</a>
+        - pages with <a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/templates/chapter-body.html"
+            >chapter-body</a> external template, <br/>
+        external header & footer templates
+    </li>
+    <li>
+        content is rendered by templates from HTML tags in same format by data sources:
+        <a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/post/home.html">demo/ananke/content/en/post/home.html</a>,
+        <a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/post/chapter-4/index.html">chapter-4</a>,
+        <a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/post/chapter-5/index.html">chapter-5</a>,
+        <a href="https://github.com/sashafirsov/shadow-dom-element/blob/main/demo/ananke/content/en/post/chapter-6/index.html">chapter-6</a>,
+    </li>
+</ul>
+</body>
+</html>

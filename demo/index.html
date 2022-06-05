@@ -10,20 +10,9 @@
     </style>
 </head>
 <body>
-<header>
-    <h1>&lt;light-dom-element&gt; demo</h1>
-    <p> Developer's documentation in <a href="https://github.com/sashafirsov/light-dom-element">Git repo</a>
-        |   This page <a href="https://github.com/sashafirsov/light-dom-element/blob/main/demo/index.html">source</a>
-    </p>
-    <p> While <code>light-dom-element</code> can render JSON as in sample bellow,
-        the thorough handling of loading-rendering lifecycle is done by
-        <a href="https://github.com/sashafirsov/slotted-element">slotted-element</a>
-    </p>
-    <p>More extended set of template with slots use is covered by
-        <a href="https://unpkg.com/css-chain-test@1.1.2/dist/slots.html">CssChain slots demo</a>.
-        CssChain is a modern DOM manipulation library with support of Light and Shadow DOM.
-    </p>
-</header>
+<light-dom-element code="./demo-header.html" >
+    <link slot="page-source" href="https://github.com/sashafirsov/light-dom-element/blob/main/demo/index.html" />
+</light-dom-element>
 
 <html-demo-element legend="Inline slots & template">
     <template>
@@ -65,13 +54,50 @@
 <light-dom-element src="slots.html" code="template.html"></light-dom-element>
     </template>
 </html-demo-element>
+<html-demo-element legend="Default slot">
+    <template>
+        <light-dom-element>
+            <template>
+                <slot><button>FAIL action</button></slot>
+            </template>
+            <button slot="">action</button>
+        </light-dom-element>    </template>
+</html-demo-element>
+
+<html-demo-element legend="slots for attributes">
+    <template>
+        <light-dom-element>
+            <template>
+                <a href="#" title="FAIL title ovverriding 🙄">
+                    <slot name="link-url"   attribute="href"    hidden ></slot>
+                    <slot name="link-title" attribute="title"   hidden ></slot>
+                    link SRC and TITLE controlled by slots
+                </a>
+
+                <hr/>
+                <img alt="image without url" id="image-1" />
+                <slot name="image-alt" attribute="alt" for="image-1" hidden></slot>
+
+                <hr/> Doc image URL by slot:<br/>
+                <img  id="image-2" alt="source from slot" />
+                <slot name="image-src" attribute="src" for="image-2" hidden></slot>
+            </template>
+            <a slot="link-url" href="./"        ></a>
+            <i slot="link-title"> link title 😃   </i>
+            <i slot="image-alt" > img  alt   😌   </i>
+            <link slot="image-src" href="doc.png" />
+        </light-dom-element>
+    </template>
+</html-demo-element>
+
+
+
+
 
 <html-demo-element legend="slots.html" src="slots.html"></html-demo-element>
 
 <html-demo-element legend="template.html" src="template.html"></html-demo-element>
 
-<script type="module" src="https://unpkg.com/html-demo-element@1.0/html-demo-element.js"></script>
-<script type="module" src="../light-dom-element.js"></script>
 
 <html-demo-element legend="json rendering">
     <json-sample src="doc.json">
@@ -86,6 +112,17 @@
 </html-demo-element>
 
 <html-demo-element legend="load json by overriding fetch()">
+
+<script type="importmap">
+  {
+    "imports": {
+      "css-chain": "https://unpkg.com/css-chain@1.1/CssChain.js",
+      "shadow-dom-element": "https://unpkg.com/shadow-dom-element@0.0/shadow-dom-element.js"
+    }
+  }
+</script>
+<script type="module" src="https://unpkg.com/html-demo-element@1.0/html-demo-element.js"></script>
+
 <script type="module">
     import LightDomElement from "../light-dom-element.js";
     class JsonSample extends LightDomElement
