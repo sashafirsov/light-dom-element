@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>light-dom-element demo</title>
+    <style>
+        body{ display: flex; flex-wrap: wrap; align-content: stretch; gap: 1rem; font-family: sans-serif; }
+        body>*{flex:1; min-width: 32rem;}
+    </style>
+</head>
+<body>
+<section>
+    <light-dom-element code="./demo-header.html" >
+        <h2 slot="sub-header">Declarative Custom Element</h2>
+        <link slot="page-source" href="https://github.com/sashafirsov/light-dom-element/blob/main/demo/dce.html" />
+    </light-dom-element>
+    <p>
+        <b>light-dom-element</b> with <b>tag</b> attribute registers the
+            <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom element</a><br/>
+        <h3>Payload handling</h3>
+        When slots payload is defined within <b>light-dom-element</b> along with tag, it is an equivalent of adding
+        this tag custom element with given payload.
+    </p>
+</section>
+<html-demo-element legend="Inline slots & template"
+    description="The dce-1 element with blue shadow is generated twice:
+                    with inline definition by slots payload and by tag"
+    >
+    <template>
+
+<style> dce-1{ box-shadow: 0 0 .5rem blue; display: inline-block; }</style>
+<light-dom-element tag="dce-1">
+    <template>
+        <style> :host{ border: dashed 3px magenta;
+                display: inline-block; margin: 1rem; }</style>
+        <slot name="slot1"><h5>FAIL heading 5 🙄</h5></slot>
+        <slot name="slot2">
+            <button>FAIL action 🤥</button>
+        </slot>
+        <slot name="slot3"><p> slot 3 not overridden </p></slot>
+        default slot
+    </template>
+    <a slot="slot2" href="#">link 😃</a>
+    <h3 slot="slot1" >heading 3 😌</h3>
+</light-dom-element>
+<dce-1>
+    <a slot="slot2" href="#"> slot 2 </a>
+    <h3 slot="slot1" > DCE header </h3>
+</dce-1>
+
+    </template>
+</html-demo-element>
+
+<!-- ======================================================================= -->
+<html-demo-element legend="in-page slots & template">
+    <template>
+
+<style> dce-2{ box-shadow: 0 0 .5rem slateblue; display: inline-block; }</style>
+<template id="in-page-template">
+        <style> :host{ border: dashed 3px cyan;
+                display: inline-block; margin: 1rem; }</style>
+    <slot name="slot1"><h5>FAIL heading 5🙄</h5></slot>
+    <slot name="slot2">
+        <button>FAIL action 🤥</button>
+    </slot>
+    <slot name="slot3"><p> slot 3 not overridden </p></slot>
+    default slot
+</template>
+<template id="in-page-slots">
+    <a slot="slot2" href="#">link 😃</a>
+    <h3 slot="slot1" >heading 3 😌</h3>
+</template>
+<light-dom-element tag="dce-2" for="in-page-template"></light-dom-element>
+<dce-2>
+    <h3 slot="slot1" >dce-2 heading </h3>
+    <a slot="slot2" href="#">slot 2 in dce-2</a>
+    <a slot="slot3" href="#">slot 3 in dce-2</a>
+    <b slot=""></b>
+</dce-2>
+<dce-2>
+    <h3 slot="slot1" >dce-2 second instance heading </h3>
+</dce-2>
+
+    </template>
+</html-demo-element>
+
+<!-- ======================================================================= -->
+<html-demo-element legend="Slots & template from URL"
+    description="payload provided with src does not trigger inline render for declaration and would be used in instance "
+>
+    <template>
+<style>dce-3{ border: dotted 4px green; display: inline-block; } </style>
+<light-dom-element tag="dce-3" src="slots.html" code="template.html"></light-dom-element>
+<dce-3></dce-3>
+    </template>
+</html-demo-element>
+<!-- ======================================================================= -->
+<html-demo-element legend="template from URL and slots URL on instance"
+    description="payload URL is provided by src attribute on dec-3b instance "
+>
+    <template>
+<style>dce-3b{ border: dotted 4px darkorange; display: inline-block; } </style>
+<light-dom-element tag="dce-3b" code="template.html"></light-dom-element>
+<dce-3b src="slots.html" ></dce-3b>
+    </template>
+</html-demo-element>
+
+<!-- ======================================================================= -->
+<html-demo-element legend="Default slot"
+    description="inline content would trigger dce-4, second instance has default slot override content"
+>
+    <template>
+        <light-dom-element tag="dce-4">
+            <template>
+                <button><slot>FAIL action</slot></button>
+            </template>
+            <span slot="">action</span>
+        </light-dom-element>
+        <dce-4> default overridden </dce-4>
+    </template>
+</html-demo-element>
+
+<!-- ======================================================================= -->
+<html-demo-element legend="Default slot only in instance"
+    description="inline content missing,only instance has default slot override content"
+>
+    <template>
+        <light-dom-element tag="dce-4a">
+            <template>
+                <button><slot>FAIL action</slot></button>
+            </template>
+        </light-dom-element>
+        <dce-4a> default overridden </dce-4a>
+    </template>
+</html-demo-element>
+
+<!-- ======================================================================= -->
+
+<html-demo-element legend="slots.html" src="slots.html"></html-demo-element>
+
+<html-demo-element legend="template.html" src="template.html"></html-demo-element>
+
+<script type="module" src="https://unpkg.com/html-demo-element@1.0/html-demo-element.js"></script>
+<script type="module" src="../light-dom-element.js"></script>
+
+
+
+</body>
+</html>
