@@ -1,3 +1,7 @@
+
+# light-dom-element project is frozen 
+in favor of [custom-element](https://github.com/EPA-WG/custom-element) which is compatible with `light-dom-element` by functionality and API.
+
 # light-dom-element
 
 is covering the typical UI tasks:
