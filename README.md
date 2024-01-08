@@ -1,6 +1,9 @@
 
 # light-dom-element project is frozen 
-in favor of [custom-element](https://github.com/EPA-WG/custom-element) which is compatible with `light-dom-element` by functionality and API.
+in favor of [custom-element](https://github.com/EPA-WG/custom-element) which is compatible with `light-dom-element` by functionality and API. 
+
+`light-dom-element` is still can be used as lighter version. If you look to minimal JS with same native functionality in shadowDOM,
+use [shadow-dom-element](https://github.com/sashafirsov/shadow-dom-element)
 
 # light-dom-element
 
